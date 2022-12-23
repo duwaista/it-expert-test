@@ -1,0 +1,36 @@
+.container {
+  padding: 0.5em;
+  border: 1px #bebebe solid;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+
+  .title-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title-text {
+      font-size: 1em;
+      font-weight: bold;
+    }
+  }
+
+  .todos-box {
+    margin: 0.4em 0;
+    overflow-y: scroll;
+
+    .todo-item {
+      padding: 2px 0;
+    }
+  }
+}
+
+.completed {
+  color: green;
+}
+.uncompleted {
+  color: red;
+}
