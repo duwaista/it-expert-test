@@ -77,6 +77,7 @@ const config: Configuration = {
   devtool: "source-map",
   devServer: {
     historyApiFallback: true,
+    allowedHosts: "all",
   },
 };
 
