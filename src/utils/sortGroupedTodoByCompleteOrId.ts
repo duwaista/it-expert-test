@@ -1,6 +1,6 @@
 import { UserTodoItem } from "../types/todo";
 
-const sortUsersTodoByCompleteOrId = (list: UserTodoItem[]) => {
+const sortGroupedTodoByCompleteOrId = (list: UserTodoItem[]) => {
   const tmpList = [...list];
 
   return tmpList.sort((a, b) => {
@@ -12,4 +12,4 @@ const sortUsersTodoByCompleteOrId = (list: UserTodoItem[]) => {
   });
 };
 
-export default sortUsersTodoByCompleteOrId;
+export default sortGroupedTodoByCompleteOrId;

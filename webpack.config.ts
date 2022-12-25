@@ -39,7 +39,7 @@ const config: Configuration = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(s*)css$/,
+        test: /\.(s*)[ac]ss$/,
         exclude: /\.module\.s[ac]ss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },

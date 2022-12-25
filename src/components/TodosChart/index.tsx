@@ -1,53 +1,17 @@
 import React, { FC, useMemo } from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend, ChartOptions, ChartData,
-} from "chart.js";
-// eslint-disable-next-line import/no-unresolved
-import { Bar } from "react-chartjs-2";
 
 import { UserTodoItem } from "../../types/todo";
+import ChartBar from "../../common/Chart/ChartBar";
 
 type Props = {
   list: UserTodoItem[];
 };
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-);
-
-const options: ChartOptions<"bar"> = {
-  plugins: {
-    title: {
-      display: false,
-    },
-  },
-  responsive: true,
-  interaction: {
-    mode: "index" as const,
-    intersect: false,
-  },
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
-
 const TodosChart: FC<Props> = ({ list }) => {
+  const labels = useMemo(() => {
+    return list.map((item) => `Пользователь ${item.userId}`);
+  }, [list]);
+
   const datasets = useMemo(() => {
     return [
       {
@@ -65,18 +29,14 @@ const TodosChart: FC<Props> = ({ list }) => {
 
   const data = useMemo(() => {
     return {
-      labels: list.map((item) => `Пользователь ${item.userId}`),
+      labels,
       datasets,
     };
-  }, [list, datasets]);
+  }, [labels, datasets]);
 
   if (!list.length) return null;
 
-  return (
-    <div>
-      <Bar data={data} options={options} />
-    </div>
-  );
+  return <ChartBar data={data} />;
 };
 
 export default TodosChart;

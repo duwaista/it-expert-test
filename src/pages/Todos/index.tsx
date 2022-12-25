@@ -4,7 +4,7 @@ import PageWrapper from "../../common/PageWrapper";
 import Button from "../../common/Button";
 import Loader from "../../common/Loader";
 import groupTodosByUsers from "../../utils/groupTodosByUsers";
-import sortUsersTodoByCompleteOrId from "../../utils/sortUsersTodoByCompleteOrId";
+import sortGroupedTodoByCompleteOrId from "../../utils/sortGroupedTodoByCompleteOrId";
 import UserTodosCardList from "../../components/UserTodosCardList";
 import TodosChart from "../../components/TodosChart";
 import TodoApi from "../../services/api/todo";
@@ -21,7 +21,7 @@ const TodosPage = () => {
       const { data } = await TodoApi.getAllTodos();
       // Хуков не существует...
       const groupedTodos = groupTodosByUsers(data);
-      const sortedTodos = sortUsersTodoByCompleteOrId(groupedTodos);
+      const sortedTodos = sortGroupedTodoByCompleteOrId(groupedTodos);
       setTodos(sortedTodos);
     } catch (e) {
       // Сложная логика обработки ошибок
