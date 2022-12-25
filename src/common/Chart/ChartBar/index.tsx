@@ -55,8 +55,6 @@ const Chart: FC<Props> = ({
     return { ...defaultOptions, ...options };
   }, [options]);
 
-  console.log(data)
-
   return (
     <div>
       <Bar
