@@ -1,45 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 
 import PageWrapper from "../../common/PageWrapper";
 import Button from "../../common/Button";
 import Loader from "../../common/Loader";
-import groupTodosByUsers from "../../utils/groupTodosByUsers";
-import sortGroupedTodoByCompleteOrId from "../../utils/sortGroupedTodoByCompleteOrId";
 import UserTodosCardList from "../../components/UserTodosCardList";
 import TodosChart from "../../components/TodosChart";
-import TodoApi from "../../services/api/todo";
-import { UserTodoItem } from "../../types/todo";
+import useUsersTodosList from "../../hooks/useUsersTodosList";
 
 const TodosPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [todos, setTodos] = useState<UserTodoItem[]>([]);
-
-  // Лучше использовать react-query
-  const getAllTodos = async () => {
-    setLoading(true);
-    try {
-      const { data } = await TodoApi.getAllTodos();
-      // Хуков не существует...
-      const groupedTodos = groupTodosByUsers(data);
-      const sortedTodos = sortGroupedTodoByCompleteOrId(groupedTodos);
-      setTodos(sortedTodos);
-    } catch (e) {
-      // Сложная логика обработки ошибок
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    todos,
+    isError,
+    isLoading,
+    fetchTodos,
+  } = useUsersTodosList();
 
   return (
     <PageWrapper title="ToDo">
       <Button
-        disabled={loading}
-        onClick={() => getAllTodos()}
+        disabled={isLoading}
+        onClick={() => fetchTodos()}
       >
         Загрузить данные
       </Button>
-      {loading && <Loader />}
+      {isLoading && <Loader />}
+      {isError && <span>Ошибка загрузки</span>}
       {/* Элегантно решаем проблему отсутствия redux */}
       <TodosChart list={todos} />
       <UserTodosCardList list={todos} />
