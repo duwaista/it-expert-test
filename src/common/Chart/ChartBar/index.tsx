@@ -42,7 +42,7 @@ const defaultOptions: ChartOptions<"bar"> = {
       stacked: true,
     },
     y: {
-      stacked: true,
+      beginAtZero: true,
     },
   },
 };

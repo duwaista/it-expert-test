@@ -15,14 +15,14 @@ const TodosChart: FC<Props> = ({ list }) => {
   const datasets = useMemo(() => {
     return [
       {
-        label: "Всего",
-        data: list.map((item) => item.totalTodos),
-        backgroundColor: "red",
-      },
-      {
         label: "Выполнено",
         data: list.map((item) => item.completedTodosCount),
         backgroundColor: "blue",
+      },
+      {
+        label: "Всего",
+        data: list.map((item) => item.totalTodos),
+        backgroundColor: "red",
       },
     ];
   }, [list]);
